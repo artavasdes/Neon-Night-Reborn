@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StudioLogo.unity
+    guid: 14e304953dc83624bb89b825bac4b2a7
+  - enabled: 1
+    path: Assets/Scenes/StartScreen.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b3fe92ecfe14b0341a3921b87cdbc523
+  - enabled: 1
+    path: Assets/Scenes/CharactersView.unity
+    guid: aa74689a4334e7a4c929c02ec8e4fdd3
+  - enabled: 1
+    path: Assets/Scenes/Fight Scene.unity
+    guid: 7006666e564dc4f5b8671b60497c0f0a
+  - enabled: 1
+    path: Assets/Scenes/ConnectionScene.unity
+    guid: ecc98122720884c85a8df74a0aed497e
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelection.unity
+    guid: 8a61a9dce4d3d214c8ab4f12bd8b114c
+  - enabled: 1
+    path: Assets/Scenes/altcharselect.unity
+    guid: 0309de6747e776346bfc5fffd7aacd4f
+  - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: 5e0360c94fa5e0349a32dca7eb514623
+  m_configObjects: {}
