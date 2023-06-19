@@ -133,7 +133,8 @@ public class Character_Control : NetworkBehaviour {
         });
         return;
       }
-        m_animator.SetTrigger("Hurt");
+        int i  = Random.Range(1, 3);
+        m_animator.SetTrigger("Damage" + i);
         currentHealth -= damage;
 
         if (currentHealth <= 0){
