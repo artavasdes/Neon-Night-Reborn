@@ -30,8 +30,17 @@ EditorBuildSettings:
     path: Assets/Scenes/altcharselect.unity
     guid: 0309de6747e776346bfc5fffd7aacd4f
   - enabled: 1
+    path: Assets/REBORN/Scenes/FightSceneReborn.unity
+    guid: 070fa2e9e4addcb4ab42c4365e161611
+  - enabled: 1
+    path: Assets/REBORN/Scenes/StageSelect.unity
+    guid: 166c96d8f22e6744c90ae5395c1a212e
+  - enabled: 1
     path: Assets/Scenes/StageSelect.unity
     guid: 5e0360c94fa5e0349a32dca7eb514623
+  - enabled: 1
+    path: Assets/REBORN/Scenes/CharSelectPlayer2.unity
+    guid: c4ca4f0b1b490034f8573f514b1b90ff
   - enabled: 1
     path: Assets/REBORN/Scenes/MainMenu.unity
     guid: 4eece65cd1a1d1045bd2d4a4e6eb4c12
