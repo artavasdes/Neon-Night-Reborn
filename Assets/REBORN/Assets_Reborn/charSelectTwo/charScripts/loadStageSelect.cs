@@ -6,6 +6,6 @@ public class loadStageSelect : MonoBehaviour
 {
     // Start is called before the first frame update
     public void loadStageSelectScene() {
-        Application.LoadLevel("StageSelect");
+        Application.LoadLevel("Scenes/StageSelect");
     }
 }
