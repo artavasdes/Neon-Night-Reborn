@@ -15,6 +15,6 @@ public class SceneChangeScript : MonoBehaviour
     }
 
     public void OnFadeComplete(){
-        SceneManager.LoadScene("REBORN/Scenes/MainMenu");
+        SceneManager.LoadScene("StartScreen");
     }
 }
