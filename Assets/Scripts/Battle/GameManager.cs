@@ -8,16 +8,18 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject parentCanvas;
-    public Text winnerText;
     public string chosenCharacter1;
     public string chosenCharacter2; 
-    [SerializeField] private GameObject _winScreen;
+    [SerializeField] private GameObject _winScreen1;
+    [SerializeField] private GameObject _winScreen2;
     [SerializeField] private GameObject player1;
     [SerializeField] private GameObject player2;
     [SerializeField] private GameObject player1_icon;
     [SerializeField] private GameObject player2_icon;
 
+
     public static int won = 0; 
+    private bool timer1 = false;
 
     void Start(){
         // PlayerIcon1(); // load icon 1
@@ -33,6 +35,9 @@ public class GameManager : MonoBehaviour
 
     public void Update(){ 
         GameEnd(); 
+        if (timer1 == false) {
+            StartCoroutine(myTimer());
+        }
     }
 
 
@@ -96,21 +101,36 @@ public class GameManager : MonoBehaviour
             return; 
         }
         else if (won == 2){ 
-            _winScreen.SetActive(true); 
-            winnerText.text = "Player 1 wins!";
+            _winScreen1.SetActive(true); 
             Debug.Log("Player 1 wins!"); 
         }
         else if (won == 1){ 
-            _winScreen.SetActive(true); 
+            _winScreen2.SetActive(true); 
             Debug.Log("Player 2 wins!"); 
-            winnerText.text = "Player 2 wins!";
 
         }
         else if (Timer.GameOver == true){
-            _winScreen.SetActive(true); 
+            _winScreen1.SetActive(true); 
             Debug.Log("Game Tied!"); 
-            winnerText.text = "It's a tie!";
-
         }
+
+
+        
+        Invoke("load", 5);
+        won = 0;
+        
+    }
+
+    IEnumerator myTimer()
+    {
+
+        timer1 = true;
+        yield return new WaitForSeconds(10);
+        timer1 = false;
+
+    }
+
+    void load(){
+        Application.LoadLevel("MainMenuReborn");
     }
 }
