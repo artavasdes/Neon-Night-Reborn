@@ -37,9 +37,37 @@ public class loadInputs1 : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    bool check = true;
+
+    [System.Obsolete]
     void Update()
     {
-        
+        // Debug.Log(check);
+        // Debug.Log(gameObject.transform.parent.Find("inputDisplay").GetChild(5).gameObject.active);
+        if (check && gameObject.transform.parent.Find("inputDisplay").GetChild(5).gameObject.active) {
+
+            foreach (var inp in inputs) {
+                
+                if (inp.inDevice.Equals(playerOneInput)) {
+                    Debug.Log("RUNS");
+                    inp.enabled = false;
+                    check = false;
+                    break;
+                }
+            }
+        }
+
+        if (check && gameObject.transform.parent.Find("inputDisplay2").GetChild(5).gameObject.active) {
+
+            foreach (var inp in inputs) {
+                if (inp.inDevice.Equals(playerTwoInput)) {
+                    inp.enabled = false;
+                    check = false;
+                    break;
+                }
+            }
+        }
     }
 
     public void nextInput() {
@@ -50,6 +78,12 @@ public class loadInputs1 : MonoBehaviour
             index++;
         }
 
+        if (!(inputs[index].enabled)) {
+            gameObject.transform.GetChild(0).gameObject.GetComponent<Button>().interactable = false;
+        }
+        else {
+            gameObject.transform.GetChild(0).gameObject.GetComponent<Button>().interactable = true;
+        }
         gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = inputs[index].icon;
         gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = inputs[index].name;
     }
@@ -61,6 +95,13 @@ public class loadInputs1 : MonoBehaviour
         }
         else {
             index--;
+        }
+
+        if (!(inputs[index].enabled)) {
+            gameObject.transform.GetChild(0).gameObject.GetComponent<Button>().interactable = false;
+        }
+        else {
+            gameObject.transform.GetChild(0).gameObject.GetComponent<Button>().interactable = true;
         }
         gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = inputs[index].icon;
         gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = inputs[index].name;
@@ -74,6 +115,7 @@ public class loadInputs1 : MonoBehaviour
         gameObject.transform.GetChild(3).gameObject.SetActive(false);
         gameObject.transform.GetChild(4).gameObject.SetActive(false);
         gameObject.transform.GetChild(5).gameObject.SetActive(true);
+        Debug.Log(playerOneInput.displayName);
     }
 
     public void selectInput2() {
@@ -84,6 +126,7 @@ public class loadInputs1 : MonoBehaviour
         gameObject.transform.GetChild(3).gameObject.SetActive(false);
         gameObject.transform.GetChild(4).gameObject.SetActive(false);
         gameObject.transform.GetChild(5).gameObject.SetActive(true);
+        Debug.Log(playerTwoInput.displayName);
     }
 
     class Input {
@@ -93,8 +136,12 @@ public class loadInputs1 : MonoBehaviour
 
         public Sprite icon;
         public InputDevice inDevice;
+        public bool enabled;
+
+        
         public Input(InputDevice inDevice) {
             name = inDevice.displayName;
+            enabled = true;
 
             this.inDevice = inDevice;
 

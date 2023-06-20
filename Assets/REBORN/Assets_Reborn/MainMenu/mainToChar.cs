@@ -16,7 +16,7 @@ public class mainToChar : MonoBehaviour
     }
     public void mainToCharScene()
     {
-        Application.LoadLevel("CharSelect");
+        Application.LoadLevel("InputSelect");
     }
 
     public void mainClean() {
