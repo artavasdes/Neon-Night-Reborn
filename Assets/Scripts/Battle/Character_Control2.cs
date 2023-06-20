@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Collections.Generic;
 using Mirror;
 
 public class Character_Control2 : MonoBehaviour {
@@ -22,10 +23,7 @@ public class Character_Control2 : MonoBehaviour {
     public float attackRange = 0.5f;
     public LayerMask playerLayers;
 
-    public Dictionary<string, bool> inputs = new Dictionary<string, bool>{
-        {"damage", Input.GetKeyDown("q")} 
-
-    }
+    public Dictionary<string, bool> inputs = new Dictionary<string, bool>{{"damage", Input.GetKeyDown("q")}};
 
     // Use this for initialization
     void Start () {
