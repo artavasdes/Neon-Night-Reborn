@@ -8,15 +8,40 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject parentCanvas;
-    public int chosenCharacter = AltCharacterDisplay.chosenCharacter; 
-    public GameObject player1; 
-    void Awake(){
-        PlayerIcon1(); // load icon 1
-        Player1Char(); 
+    public string chosenCharacter1 = charSelectOne.selectedCharOneName; 
+    public string chosenCharacter2 = charSelectTwo.selectedCharOneName; 
+    [SerializeField] private GameObject _winScreen;
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
+    public static int won = 0; 
+
+    void Start(){
+        // PlayerIcon1(); // load icon 1
+        // Player1Char(); 
+        CharSet(); 
+        HeaderSet(); 
     }
 
-    void PlayerIcon1(){
-        string cgPath = "Headshots/char_" + chosenCharacter + "_icon";
+    public void Update(){ 
+        GameEnd(); 
+    }
+
+
+    void CharSet(){ 
+        // player 1 animation set 
+        string path1 = "Animation/" + 13 + "_animation/" + 13; 
+        Animator animator1 = player1.GetComponent<Animator>(); 
+        animator1.runtimeAnimatorController = Resources.Load(path1) as RuntimeAnimatorController;
+
+        // player 2 animation set 
+        string path2 = "Animation/" + chosenCharacter2 + "_animation/" + chosenCharacter2; 
+        Animator animator2 = player1.GetComponent<Animator>(); 
+        animator2.runtimeAnimatorController = Resources.Load(path2) as RuntimeAnimatorController;
+    }
+
+
+    void HeaderSet(){  
+        string cgPath = "Headshots/char_" + 13 + "_icon";
         Texture2D CG = Resources.Load<Texture2D>(cgPath);
         Sprite cgSprite = Sprite.Create(CG, new Rect(0.0f, 0.0f, CG.width, CG.height), new Vector2(0f, 0f), 100.0f);
 
@@ -29,10 +54,12 @@ public class GameManager : MonoBehaviour
         icon.GetComponent<Image>().sprite = cgSprite;
     }
 
-    void Player1Char(){
-        string cgPath = "Animation/" + chosenCharacter + "_animation/" + chosenCharacter; 
-        Animator animator = player1.GetComponent<Animator>(); 
-        animator.runtimeAnimatorController = Resources.Load(cgPath) as RuntimeAnimatorController;
-
+    void GameEnd(){ 
+        if (won == 0){
+            return; 
+        }
+        else if (won == 1){ 
+            _winScreen.SetActive(true); 
+        }
     }
 }
