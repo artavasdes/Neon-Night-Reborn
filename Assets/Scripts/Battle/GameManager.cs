@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject parentCanvas;
-    public string chosenCharacter1 = charSelectOne.selectedCharOneName; 
-    public string chosenCharacter2 = charSelectTwo.selectedCharOneName; 
+    public Text winnerText;
+    public string chosenCharacter1;
+    public string chosenCharacter2; 
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject player1;
     [SerializeField] private GameObject player2;
@@ -21,6 +22,10 @@ public class GameManager : MonoBehaviour
     void Start(){
         // PlayerIcon1(); // load icon 1
         // Player1Char(); 
+        // Debug.Log(chosenCharacter1);
+        chosenCharacter1 = charSelectOne.selectedCharOneName.Substring(1); 
+        chosenCharacter2 = charSelectTwo.selectedCharOneName.Substring(1); 
+
         CharSet(); 
         HeaderSet(); 
         Timer.TimerOn = true; 
@@ -36,20 +41,30 @@ public class GameManager : MonoBehaviour
         player1.SetActive(true); 
         player2.SetActive(true); 
 
+        if (1 == int.Parse(chosenCharacter1) || 2 == int.Parse(chosenCharacter1)){
+            Debug.Log("transform");
+            player1.transform.localScale += new Vector3(3,3,0); 
+        }
+        if (1 == int.Parse(chosenCharacter2) || 2 == int.Parse(chosenCharacter2)){ 
+            Debug.Log("transform");
+            player2.transform.localScale += new Vector3(3,3,0); 
+        }
+
         // player 1 animation set 
-        string path1 = "Animation/" + 1 + "_animation/" + 1; 
+        string path1 = "Animation/" + chosenCharacter1 + "_animation/" + chosenCharacter1; 
         Animator animator1 = player1.GetComponent<Animator>(); 
         animator1.runtimeAnimatorController = Resources.Load(path1) as RuntimeAnimatorController;
 
         // player 2 animation set 
-        string path2 = "Animation/" + 0 + "_animation/" + 0; 
-        Animator animator2 = player1.GetComponent<Animator>(); 
+        string path2 = "Animation/" + chosenCharacter2 + "_animation/" + chosenCharacter2; 
+        Animator animator2 = player2.GetComponent<Animator>(); 
         animator2.runtimeAnimatorController = Resources.Load(path2) as RuntimeAnimatorController;
     }
 
 
     void HeaderSet(){  
-        string cgPath = "Headshots/char_" + 13 + "_icon";
+        Debug.Log(chosenCharacter1);
+        string cgPath = "Headshots/char_" + chosenCharacter1 + "_icon";
         Texture2D CG = Resources.Load<Texture2D>(cgPath);
         Sprite cgSprite = Sprite.Create(CG, new Rect(0.0f, 0.0f, CG.width, CG.height), new Vector2(0f, 0f), 100.0f);
 
@@ -62,7 +77,7 @@ public class GameManager : MonoBehaviour
         player1_icon.GetComponent<Image>().sprite = cgSprite;
         player1_icon.SetActive(true); 
 
-        cgPath = "Headshots/char_" + 12 + "_icon";
+        cgPath = "Headshots/char_" + chosenCharacter2 + "_icon";
         CG = Resources.Load<Texture2D>(cgPath);
         cgSprite = Sprite.Create(CG, new Rect(0.0f, 0.0f, CG.width, CG.height), new Vector2(0f, 0f), 100.0f);
 
@@ -80,18 +95,21 @@ public class GameManager : MonoBehaviour
         if (won == 0){
             return; 
         }
-        else if (won == 1){ 
-            _winScreen.SetActive(true); 
-            Debug.Log("Player 1 wins!"); 
-        }
         else if (won == 2){ 
             _winScreen.SetActive(true); 
+            winnerText.text = "Player 1 wins!";
+            Debug.Log("Player 1 wins!"); 
+        }
+        else if (won == 1){ 
+            _winScreen.SetActive(true); 
             Debug.Log("Player 2 wins!"); 
+            winnerText.text = "Player 2 wins!";
 
         }
         else if (Timer.GameOver == true){
             _winScreen.SetActive(true); 
             Debug.Log("Game Tied!"); 
+            winnerText.text = "It's a tie!";
 
         }
     }
