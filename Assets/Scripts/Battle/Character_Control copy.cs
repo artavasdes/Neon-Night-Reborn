@@ -3,11 +3,10 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using Mirror;
 
-public class Character_Control : NetworkBehaviour {
+public class Character_Control : MonoBehaviour {
     [SerializeField] float      m_speed = 4.0f;
     [SerializeField] float      m_jumpForce = 7.5f;
     [SerializeField] float      scale = 2f;
-
 
     public int damage = 10;
     private Animator            m_animator;
@@ -45,9 +44,9 @@ public class Character_Control : NetworkBehaviour {
           healthBar.SetMaxHealth(maxHealth);
           healthBar.SetHealth(currentHealth);
         }
-        if (!isLocalPlayer) {
-          return;
-        }
+        // if (!isLocalPlayer) {
+        //   return;
+        // }
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State()) {
             m_grounded = true;
@@ -126,20 +125,23 @@ public class Character_Control : NetworkBehaviour {
 
     public void TakeDamage(int damage)
     {
-      if (!isLocalPlayer) {
-        NetworkClient.Send(new DamageCharacterMessage {
-            damage = AltCharacterDisplay.chosenCharacter,
-            isCharHosting = !GlobalNetState.isHosting
-        });
-        return;
-      }
+    //   if (!isLocalPlayer) {
+    //     NetworkClient.Send(new DamageCharacterMessage {
+    //         damage = AltCharacterDisplay.chosenCharacter,
+    //         isCharHosting = !GlobalNetState.isHosting
+    //     });
+    //     return;
+    //   }
         int i  = Random.Range(1, 3);
         m_animator.SetTrigger("Damage" + i);
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth); 
 
         if (currentHealth <= 0){
             m_animator.SetTrigger("Death");
             this.enabled = false;
+            GameManager.won = 1; 
+            Debug.Log(GameManager.won);
         }
     }
 }
