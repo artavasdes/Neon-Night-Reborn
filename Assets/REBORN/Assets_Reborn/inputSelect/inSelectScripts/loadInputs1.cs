@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class loadInputs1 : MonoBehaviour
 {
-    public InputDevice playerOneInput;
-    public InputDevice playerTwoInput;
+    public static InputDevice playerOneInput;
+    public static InputDevice playerTwoInput;
 
     ReadOnlyArray<InputDevice> devices;
     Input[] inputs;
