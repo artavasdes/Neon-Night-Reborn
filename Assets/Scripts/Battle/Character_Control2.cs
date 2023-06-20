@@ -62,8 +62,14 @@ public class Character_Control2 : MonoBehaviour {
             m_animator.SetBool("isGrounded", m_grounded);
         }
 
+        float inputX = 0; 
+        if (Input.GetKeyDown(KeyCode.LeftArrow)){
+            inputX = Input.GetAxis("Horizontal"); 
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow)){
+            inputX = Input.GetAxis("Horizontal"); 
+        }
         // -- Handle input and movement --
-        float inputX = Input.GetAxis("Horizontal");
 
         // Swap direction of sprite depending on walk direction
         if (inputX > 0)
@@ -80,6 +86,9 @@ public class Character_Control2 : MonoBehaviour {
             m_animator.SetFloat("speed", 0);
         }
 
+
+       
+
         //Set AirSpeed in animator
         // m_animator.SetFloat("AirSpeed", m_body2d.velocity.y);
 
@@ -95,21 +104,26 @@ public class Character_Control2 : MonoBehaviour {
         }
 
         //Attack
-        if(Input.GetMouseButtonDown(0)) {
+        if(Input.GetKeyDown(KeyCode.Return)) {
+            Debug.Log("Key down");
             // int i  = Random.Range(1, 4);
             m_animator.SetTrigger("Attack");
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
+            Debug.Log("Plyer 2" + hitPlayers);
             foreach(Collider2D player in hitPlayers){
-                player.GetComponent<Character_Control>().TakeDamage(damage);
+                Character_Control opponent = player.GetComponentInParent<Character_Control>();
+                Debug.Log(opponent);
+                opponent.TakeDamage(damage);
             }
         }
+
         // block
         else if (Input.GetKeyDown("/")){
             m_animator.SetTrigger("Block");
         }
 
         //Jump
-        else if (Input.GetKeyDown(KeyCode.Space) && m_grounded) {
+        else if (Input.GetKeyDown(KeyCode.RightShift) && m_grounded) {
             m_animator.SetTrigger("Jump");
             m_grounded = true;
             m_animator.SetBool("isGrounded", m_grounded);

@@ -97,7 +97,11 @@ public class Character_Control : MonoBehaviour {
             m_animator.SetTrigger("Attack");
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
             foreach(Collider2D player in hitPlayers){
-                player.transform.parent.gameObject.GetComponent<Character_Control>().TakeDamage(damage);
+                Debug.Log(player);
+                //GameObject opp = player.GetComponent
+                //player.transform.parent.gameObject.GetComponent<Character_Control>().TakeDamage(damage);
+                Character_Control2 opponent = player.GetComponentInParent<Character_Control2>();
+                opponent.TakeDamage(damage);
             }
         }
         // block
