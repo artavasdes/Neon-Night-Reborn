@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using System.Collections.Generic;
 using Mirror;
 
 public class Character_Control2 : MonoBehaviour {
@@ -23,7 +22,10 @@ public class Character_Control2 : MonoBehaviour {
     public float attackRange = 0.5f;
     public LayerMask playerLayers;
 
-    public Dictionary<string, bool> inputs = new Dictionary<string, bool>{{"damage", Input.GetKeyDown("q")}};
+    // public Dictionary<string, bool> inputs = new Dictionary<string, bool>{
+    //     {"damage", Input.GetKeyDown("q")} 
+
+    // }
 
     // Use this for initialization
     void Start () {
@@ -47,9 +49,7 @@ public class Character_Control2 : MonoBehaviour {
           healthBar.SetMaxHealth(maxHealth);
           healthBar.SetHealth(currentHealth);
         }
-        // if (!isLocalPlayer) {
-        //   return;
-        // }
+
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State()) {
             m_grounded = true;
@@ -90,21 +90,21 @@ public class Character_Control2 : MonoBehaviour {
         // }
 
         //Hurt
-        if (Input.GetKeyDown("q")){
+        if (Input.GetKeyDown("e")){
             TakeDamage(20);
         }
 
         //Attack
         if(Input.GetMouseButtonDown(0)) {
-            int i  = Random.Range(1, 4);
-            m_animator.SetTrigger("Attack" + i);
+            // int i  = Random.Range(1, 4);
+            m_animator.SetTrigger("Attack");
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
             foreach(Collider2D player in hitPlayers){
                 player.GetComponent<Character_Control>().TakeDamage(damage);
             }
         }
         // block
-        else if (Input.GetMouseButton(1)){
+        else if (Input.GetKeyDown("/")){
             m_animator.SetTrigger("Block");
         }
 
@@ -135,15 +135,15 @@ public class Character_Control2 : MonoBehaviour {
     //     });
     //     return;
     //   }
-        int i  = Random.Range(1, 3);
-        m_animator.SetTrigger("Damage" + i);
+        // int i  = Random.Range(1, 3);
+        m_animator.SetTrigger("Damage");
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth); 
 
         if (currentHealth <= 0){
             m_animator.SetTrigger("Death");
             this.enabled = false;
-            GameManager.won = 1; 
+            GameManager.won = 2; 
             Debug.Log(GameManager.won);
         }
     }

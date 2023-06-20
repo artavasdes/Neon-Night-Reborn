@@ -12,10 +12,10 @@ public class Timer : MonoBehaviour
     public static bool GameOver = false;
 
     public TextMeshProUGUI TimerText;
-    // void Start()
-    // {
-    //     TimerOn = true;
-    // }
+    void Start()
+    {
+        TimerOn = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,7 +33,7 @@ public class Timer : MonoBehaviour
                 TimeLeft = 0;
                 TimerOn = false;
                 GameOver = true;
-                SceneManager.LoadScene("MainMenu");
+                //SceneManager.LoadScene("MainMenu");
             }
         }
     }

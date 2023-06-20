@@ -93,8 +93,8 @@ public class Character_Control : MonoBehaviour {
 
         //Attack
         if(Input.GetMouseButtonDown(0)) {
-            int i  = Random.Range(1, 4);
-            m_animator.SetTrigger("Attack" + i);
+            // int i  = Random.Range(1, 4);
+            m_animator.SetTrigger("Attack");
             Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
             foreach(Collider2D player in hitPlayers){
                 player.GetComponent<Character_Control>().TakeDamage(damage);
@@ -132,8 +132,8 @@ public class Character_Control : MonoBehaviour {
     //     });
     //     return;
     //   }
-        int i  = Random.Range(1, 3);
-        m_animator.SetTrigger("Damage" + i);
+        // int i  = Random.Range(1, 3);
+        m_animator.SetTrigger("Damage");
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth); 
 
